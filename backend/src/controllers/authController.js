@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'my_secret_key';
+const JWT_SECRET =
+  process.env.JWT_SECRET || 'super_secret_jwt_key_data_visualization_platform_2026';
 
 
 
