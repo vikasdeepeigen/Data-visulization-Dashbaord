@@ -1,6 +1,12 @@
+const normalizeApiUrl = (rawUrl) => {
+  const cleaned = rawUrl.trim().replace(/\/+$/, '');
+  return cleaned.endsWith('/api') ? cleaned : `${cleaned}/api`;
+};
+
 const getBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
+  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL;
+  if (envUrl && envUrl.trim()) {
+    return normalizeApiUrl(envUrl);
   }
   const host = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
   return `http://${host}:5000/api`;
