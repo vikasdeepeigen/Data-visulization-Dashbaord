@@ -10,7 +10,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState('User');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -24,7 +23,7 @@ export default function LoginPage() {
     }
 
     setIsSubmitting(true);
-    const result = await login(email, password, role);
+    const result = await login(email, password);
     setIsSubmitting(false);
 
     if (!result.success) {
@@ -103,42 +102,12 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                Select Role
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setRole('User')}
-                  className={`py-2.5 px-4 rounded-lg border text-sm font-medium transition-colors ${
-                    role === 'User'
-                      ? 'bg-blue-900 border-blue-900 text-white'
-                      : 'bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100'
-                  }`}
-                >
-                  User
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setRole('Admin')}
-                  className={`py-2.5 px-4 rounded-lg border text-sm font-medium transition-colors ${
-                    role === 'Admin'
-                      ? 'bg-blue-900 border-blue-900 text-white'
-                      : 'bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100'
-                  }`}
-                >
-                  Admin
-                </button>
-              </div>
-            </div>
-
             <button
               type="submit"
               disabled={isSubmitting}
               className="w-full py-2.5 px-4 mt-2 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-semibold text-sm transition-colors disabled:opacity-50"
             >
-              {isSubmitting ? 'Signing in...' : `Login as ${role}`}
+              {isSubmitting ? 'Signing in...' : 'Login'}
             </button>
           </form>
 
@@ -152,7 +121,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Clean Credentials Reference */}
         <div className="mt-4 p-3.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 space-y-1">
           <div className="font-semibold text-slate-800">Default Accounts:</div>
           <div className="flex justify-between font-mono text-[11px]">

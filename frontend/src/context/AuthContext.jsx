@@ -61,11 +61,11 @@ export const AuthProvider = ({ children }) => {
     refreshUserSession();
   }, [refreshUserSession]);
 
-  const login = async (email, password, selectedRole) => {
+  const login = async (email, password) => {
     try {
       const data = await apiRequest('/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ email, password, role: selectedRole }),
+        body: JSON.stringify({ email, password }),
       });
 
       localStorage.setItem('token', data.token);
@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (fullName, email, password, confirmPassword) => {
+  const register = async (fullName, email, password, confirmPassword, role = 'User') => {
     try {
       const data = await apiRequest('/auth/register', {
         method: 'POST',
@@ -91,6 +91,7 @@ export const AuthProvider = ({ children }) => {
           email,
           password,
           confirmPassword,
+          role,
         }),
       });
       return {

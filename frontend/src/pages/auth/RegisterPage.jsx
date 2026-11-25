@@ -9,6 +9,7 @@ export default function RegisterPage() {
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('User');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -38,13 +39,14 @@ export default function RegisterPage() {
     }
 
     setIsSubmitting(true);
-    const result = await register(fullName, email, password, confirmPassword);
+    const result = await register(fullName, email, password, confirmPassword, role);
     setIsSubmitting(false);
 
     if (result.success) {
       setSuccessMessage(result.message);
       setFullName('');
       setEmail('');
+      setRole('User');
       setPassword('');
       setConfirmPassword('');
       setTimeout(() => {
@@ -62,7 +64,7 @@ export default function RegisterPage() {
           <div className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-blue-900 text-white font-bold text-base mb-3">
             AV
           </div>
-          <h1 className="text-xl font-bold text-slate-900">Create User Account</h1>
+          <h1 className="text-xl font-bold text-slate-900">Create Account</h1>
           <p className="text-sm text-slate-600 mt-1">
             Register for the AV Data Visualization Platform
           </p>
@@ -118,6 +120,36 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                Select Role
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setRole('User')}
+                  className={`py-2.5 px-4 rounded-lg border text-sm font-medium transition-colors ${
+                    role === 'User'
+                      ? 'bg-blue-900 border-blue-900 text-white'
+                      : 'bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100'
+                  }`}
+                >
+                  User
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setRole('Admin')}
+                  className={`py-2.5 px-4 rounded-lg border text-sm font-medium transition-colors ${
+                    role === 'Admin'
+                      ? 'bg-blue-900 border-blue-900 text-white'
+                      : 'bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100'
+                  }`}
+                >
+                  Admin
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -166,16 +198,12 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            <p className="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-2.5">
-              New registrations create standard User accounts. Admin will assign permitted software tools.
-            </p>
-
             <button
               type="submit"
               disabled={isSubmitting}
               className="w-full py-2.5 px-4 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-semibold text-sm transition-colors disabled:opacity-50"
             >
-              {isSubmitting ? 'Creating Account...' : 'Register'}
+              {isSubmitting ? 'Creating Account...' : `Register as ${role}`}
             </button>
           </form>
 

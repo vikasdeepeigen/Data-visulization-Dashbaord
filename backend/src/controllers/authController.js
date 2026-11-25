@@ -21,10 +21,14 @@ const generateToken = (user) => {
 // Register
 const register = async (req, res) => {
   try {
-    const { fullName, email, password, confirmPassword } = req.body;
+    const { fullName, email, password, confirmPassword, role = 'User' } = req.body;
 
     if (!fullName || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    if (!['User', 'Admin'].includes(role)) {
+      return res.status(400).json({ message: 'Invalid role selected' });
     }
 
     if (password !== confirmPassword) {
@@ -45,7 +49,7 @@ const register = async (req, res) => {
       fullName,
       email: email.toLowerCase().trim(),
       password,
-      role: 'User',
+      role,
     });
 
     return res.status(201).json({
@@ -67,8 +71,8 @@ const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
-    if (!email || !password || !role) {
-      return res.status(400).json({ message: 'All fields are required' });
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
     }
 
     const user = await User.findOne({
@@ -89,7 +93,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    if (user.role !== role) {
+    if (role && user.role !== role) {
       return res.status(403).json({ message: 'Incorrect role selected' });
     }
 
