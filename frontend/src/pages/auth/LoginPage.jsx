@@ -13,6 +13,9 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -43,10 +46,10 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-blue-900 text-white font-bold text-base mb-3">
-            AV
+            SR
           </div>
           <h1 className="text-xl font-bold text-slate-900">
-            AV Data Visualization Platform
+            Data Visualization Dashbaord
           </h1>
           <p className="text-sm text-slate-600 mt-1">Sign in to continue to your workspace</p>
         </div>
@@ -121,17 +124,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 space-y-1">
-          <div className="font-semibold text-slate-800">Default Accounts:</div>
-          <div className="flex justify-between font-mono text-[11px]">
-            <span>Admin: admin@dataviz.com</span>
-            <span>AdminPassword123!</span>
-          </div>
-          <div className="flex justify-between font-mono text-[11px]">
-            <span>User: user@dataviz.com</span>
-            <span>UserPassword123!</span>
-          </div>
-        </div>
       </div>
     </div>
   );

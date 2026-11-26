@@ -37,6 +37,9 @@ export default function DataEntryPage() {
   const [recentRecords, setRecentRecords] = useState([]);
   const [loadingRecords, setLoadingRecords] = useState(false);
 
+
+
+
   useEffect(() => {
     if (accessibleSoftware.length === 0) return;
     const paramId = searchParams.get('softwareId');
@@ -47,6 +50,10 @@ export default function DataEntryPage() {
       setSelectedSoftwareId(accessibleSoftware[0]._id);
     }
   }, [accessibleSoftware, searchParams, selectedSoftwareId]);
+
+
+
+
 
   useEffect(() => {
     const sw = accessibleSoftware.find((s) => s._id === selectedSoftwareId) || null;
@@ -63,6 +70,10 @@ export default function DataEntryPage() {
     setSuccessMsg('');
   }, [selectedSoftwareId, accessibleSoftware]);
 
+
+
+
+
   const fetchRecentRecords = useCallback(async () => {
     if (!selectedSoftwareId) return;
     setLoadingRecords(true);
@@ -76,9 +87,14 @@ export default function DataEntryPage() {
     }
   }, [selectedSoftwareId]);
 
+
+
+
   useEffect(() => {
     fetchRecentRecords();
   }, [fetchRecentRecords]);
+
+
 
   const handleAutoFillPending = () => {
     const t = Number(totalData) || 0;
@@ -160,6 +176,8 @@ export default function DataEntryPage() {
       setSubmitting(false);
     }
   };
+
+  
 
   const handleDeleteRecord = async (recordId) => {
     if (!window.confirm('Delete this record?')) return;

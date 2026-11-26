@@ -3,10 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { apiRequest, triggerFileDownload } from '../../api/client';
 import { useAuth } from '../../context/AuthContext';
 import { getDateRangeForPeriod } from '../../utils/dateFilters';
+
+
 import KpiCard from '../../components/common/KpiCard';
 import ProgressBar from '../../components/common/ProgressBar';
 import StatusBadge from '../../components/common/StatusBadge';
 import EmptyState from '../../components/common/EmptyState';
+
+
 import {
   ArrowLeft,
   PlusSquare,
@@ -97,6 +101,10 @@ export default function SoftwareDetailPage() {
   const [editError, setEditError] = useState('');
   const [previewExcelModal, setPreviewExcelModal] = useState(null);
 
+
+
+
+
   const fetchSoftwareDashboard = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -137,6 +145,8 @@ export default function SoftwareDetailPage() {
     }
   };
 
+
+
   const handleSaveEditRecord = async (e) => {
     e.preventDefault();
     if (!editingRecord) return;
@@ -167,6 +177,8 @@ export default function SoftwareDetailPage() {
     }
   };
 
+
+
   const handleExportSoftwareReport = async (format) => {
     try {
       const { startDate, endDate } = getDateRangeForPeriod(period);
@@ -185,6 +197,9 @@ export default function SoftwareDetailPage() {
       alert(err.message);
     }
   };
+
+
+  
 
   const handleInspectExcel = async (excelId) => {
     try {

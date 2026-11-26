@@ -32,11 +32,14 @@ import {
   Cell,
 } from 'recharts';
 
+
+
 const STATUS_COLORS = {
   Completed: '#10b981',
   Processing: '#1e40af',
   Pending: '#f59e0b',
 };
+
 
 export default function SummaryDashboardPage() {
   const { user, accessibleSoftware } = useAuth();
@@ -49,6 +52,10 @@ export default function SummaryDashboardPage() {
   const [period, setPeriod] = useState('all'); // 'all' | 'today' | 'month' | 'year'
   const [dataType, setDataType] = useState('all');
   const [search, setSearch] = useState('');
+
+
+
+
 
   const fetchDashboard = useCallback(async () => {
     setLoading(true);
@@ -69,6 +76,10 @@ export default function SummaryDashboardPage() {
       setLoading(false);
     }
   }, [period, dataType, search]);
+
+
+
+
 
   useEffect(() => {
     fetchDashboard();
@@ -93,6 +104,8 @@ export default function SummaryDashboardPage() {
     { name: 'Pending', value: kpis.pending, color: STATUS_COLORS.Pending },
   ].filter((d) => d.value > 0);
 
+
+
   const chartData = softwareComparison.map((sw) => ({
     softwareId: sw.softwareId,
     shortName: sw.name.length > 16 ? `${sw.name.slice(0, 15)}…` : sw.name,
@@ -101,6 +114,8 @@ export default function SummaryDashboardPage() {
     Processing: sw.processing,
     Pending: sw.pending,
   }));
+
+  
 
   if (accessibleSoftware.length === 0 && !loading) {
     return (

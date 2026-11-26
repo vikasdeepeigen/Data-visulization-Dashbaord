@@ -29,6 +29,10 @@ export default function ExcelManagementPage() {
   const [selectedColIdx, setSelectedColIdx] = useState(0);
   const [loadingDetails, setLoadingDetails] = useState(false);
 
+
+
+
+
   const loadExcelDetails = useCallback(async (id) => {
     if (!id) return;
     setLoadingDetails(true);
@@ -44,6 +48,9 @@ export default function ExcelManagementPage() {
       setLoadingDetails(false);
     }
   }, []);
+
+
+
 
   const fetchHistory = useCallback(
     async (selectId = null) => {
@@ -67,9 +74,14 @@ export default function ExcelManagementPage() {
     [loadExcelDetails]
   );
 
+
+
+
   useEffect(() => {
     fetchHistory();
   }, [fetchHistory]);
+
+
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -77,6 +89,8 @@ export default function ExcelManagementPage() {
       setFeedback({ type: 'error', text: 'Please choose an Excel file first.' });
       return;
     }
+
+
 
     setFeedback(null);
     setUploading(true);
@@ -88,6 +102,9 @@ export default function ExcelManagementPage() {
         method: 'POST',
         body: formData,
       });
+
+
+
 
       setFeedback({ type: 'success', text: res.message || 'Excel file uploaded successfully.' });
       setSelectedFile(null);
@@ -109,6 +126,9 @@ export default function ExcelManagementPage() {
     }
   };
 
+
+
+
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this Excel file?')) return;
     try {
@@ -121,6 +141,9 @@ export default function ExcelManagementPage() {
       alert(err.message);
     }
   };
+
+
+
 
   const extractClasses = (sheet, colIdx) => {
     if (!sheet) return [];
@@ -137,6 +160,8 @@ export default function ExcelManagementPage() {
     return out;
   };
 
+
+  
   const currentSheet =
     activeExcel?.sheets?.find((s) => s.sheetName === activeSheetName) ||
     activeExcel?.sheets?.[0] ||

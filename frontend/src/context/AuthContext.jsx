@@ -9,6 +9,9 @@ export const AuthProvider = ({ children }) => {
   const [accessibleSoftware, setAccessibleSoftware] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+
+
   const loadSoftwareList = useCallback(async (authToken) => {
     if (!authToken) {
       setAccessibleSoftware([]);
@@ -24,6 +27,10 @@ export const AuthProvider = ({ children }) => {
       setAccessibleSoftware([]);
     }
   }, []);
+
+
+
+
 
   const refreshUserSession = useCallback(async () => {
     const savedToken = localStorage.getItem('token');
@@ -61,6 +68,11 @@ export const AuthProvider = ({ children }) => {
     refreshUserSession();
   }, [refreshUserSession]);
 
+
+
+
+
+
   const login = async (email, password) => {
     try {
       const data = await apiRequest('/auth/login', {
@@ -82,6 +94,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+
+
+  
   const register = async (fullName, email, password, confirmPassword, role = 'User') => {
     try {
       const data = await apiRequest('/auth/register', {

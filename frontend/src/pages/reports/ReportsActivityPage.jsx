@@ -28,6 +28,9 @@ export default function ReportsActivityPage() {
   const [editSaving, setEditSaving] = useState(false);
   const [editError, setEditError] = useState('');
 
+
+
+
   const fetchReports = useCallback(async () => {
     setLoadingReports(true);
     try {
@@ -41,6 +44,8 @@ export default function ReportsActivityPage() {
       setLoadingReports(false);
     }
   }, [softwareId]);
+
+
 
   useEffect(() => {
     fetchReports();
@@ -59,6 +64,8 @@ export default function ReportsActivityPage() {
     }
   };
 
+
+  
   const handleDeleteRecord = async (recordId) => {
     if (!window.confirm('Delete this report record permanently?')) return;
     try {

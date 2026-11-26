@@ -18,6 +18,10 @@ export default function RegisterPage() {
   const [successMessage, setSuccessMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -57,6 +61,8 @@ export default function RegisterPage() {
     }
   };
 
+  
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-slate-100">
       <div className="w-full max-w-md">
@@ -66,7 +72,7 @@ export default function RegisterPage() {
           </div>
           <h1 className="text-xl font-bold text-slate-900">Create Account</h1>
           <p className="text-sm text-slate-600 mt-1">
-            Register for the AV Data Visualization Platform
+            Register for the  Data Visualization  Dashboard
           </p>
         </div>
 
